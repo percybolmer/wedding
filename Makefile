@@ -4,8 +4,7 @@ gogenerate:
 	go generate ./...
 
 tailwindcss:
-	tailwindcss -i ./templates/tailwind.css -o ./static/assets/css/styles.css
-
+	npx tailwindcss -i templates/tailwind.css -o static/assets/css/styles.css --watch 
 
 install-deps:
 	npm install -D -g tailwindcss

@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "fmt"
 
-func Base(title string) templ.Component {
+func Base(title string, comp templ.Component) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -39,15 +39,15 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templ_7745c5c3_Var1.Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div id=\"content\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = Jibberish().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = comp.Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</main></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></main></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -76,7 +76,7 @@ func Header() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<script>\n\n  toggleMenu = () => {\n    const menu = document.getElementById('mobile-menu');\n\n    //menu?.classList.toggle('hidden');\n    if (menu.classList.contains('max-h-0')) {\n      menu.classList.remove('max-h-0', 'opacity-0');\n      menu.classList.add('max-h-screen', 'opacity-100');\n    } else {\n      menu.classList.add('max-h-0', 'opacity-0');\n      menu.classList.remove('max-h-screen', 'opacity-100');\n    }\n  }\n</script><header class=\"sticky top-0 z-50 bg-red-100 shadow-sm\"><div class=\"max-w-7xl mx-auto px-6 py-4\"><nav class=\"flex justify-around items-center text-sm font-medium text-gray-800\"><div class=\"hidden md:flex space-x-6\"><a href=\"#our-story\" class=\"text-sm hover:underline\">Vår historia</a> <a href=\"#programme\" class=\"text-sm hover:underline\">Program</a> <a href=\"#contact\" class=\"text-sm hover:underline\">Kontakt</a></div><div class=\"text-xl font-serif tracking-wide\">P <span class=\"inline-block\">🕊️</span> M</div><div class=\"hidden md:flex space-x-6\"><a href=\"#presenter\" class=\"text-sm hover:underline\">Presenter</a> <a href=\"#rsvp\" class=\"text-sm hover:underline\">OSA</a> <a href=\"#faq\" class=\"text-sm hover:underline\">Frågor</a></div><button onclick=\"toggleMenu()\" class=\"md:hidden text-gray-800\">☰</button></nav></div><div id=\"mobile-menu\" class=\"md:hidden max-h-0 opacity-0 transition-all duration-400 ease-in-out px-6 space-y-2 text-sm font-medium text-gray-800\"><a href=\"#our-story\" class=\"block\">Vår historia</a> <a href=\"#programme\" class=\"block\">Program</a> <a href=\"#contact\" class=\"block\">Kontakt</a> <a href=\"#presenter\" class=\"block\">Presenter</a> <a href=\"#rsvp\" class=\"block\">OSA</a> <a href=\"#faq\" class=\"block pb-2\">Frågor</a></div></header>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<script>\n\n  toggleMenu = () => {\n    const menu = document.getElementById('mobile-menu');\n\n    //menu?.classList.toggle('hidden');\n    if (menu.classList.contains('max-h-0')) {\n      menu.classList.remove('max-h-0', 'opacity-0');\n      menu.classList.add('max-h-screen', 'opacity-100');\n    } else {\n      menu.classList.add('max-h-0', 'opacity-0');\n      menu.classList.remove('max-h-screen', 'opacity-100');\n    }\n  }\n</script><header class=\"sticky top-0 z-50 bg-gradient-to-r from-amber-200 to-yellow-500 shadow-md\"><div class=\"max-w-7xl mx-auto px-6 py-4\"><nav class=\"flex justify-between md:justify-around items-center text-sm font-medium text-gray-800\"><div class=\"hidden md:flex space-x-8\"><button hx-trigger=\"click\" hx-get=\"/home\" hx-target=\"#content\" hx-swap=\"innerHTML\" hx-push-url=\"home\" class=\"text-sm hover:underline btn btn-ghost\">Hem</button> <button hx-trigger=\"click\" hx-get=\"/weddingday\" hx-target=\"#content\" hx-swap=\"innerHTML\" hx-push-url=\"weddingday\" class=\"text-sm hover:underline btn btn-ghost\">Bröllopsdag</button> <button hx-trigger=\"click\" hx-get=\"/history\" hx-target=\"#content\" hx-swap=\"innerHTML\" hx-push-url=\"history\" class=\"text-sm hover:underline btn btn-ghost\">Vår historia</button></div><div class=\"text-xl font-serif tracking-wide\">P <span class=\"inline-block\">❤️</span> M</div><div class=\"hidden md:flex space-x-8\"><button hx-trigger=\"click\" href=\"#crew\" hx-get=\"/crew\" hx-target=\"#content\" hx-swap=\"innerHTML\" class=\"text-sm hover:underline btn btn-ghost\">Brudfölje</button> <button hx-trigger=\"click\" href=\"#rsvp\" hx-get=\"/rsvp\" hx-target=\"#content\" hx-swap=\"innerHTML\" class=\"text-sm hover:underline btn btn-ghost\">OSA</button> <button hx-trigger=\"click\" href=\"#faq\" hx-get=\"/faq\" hx-target=\"#content\" hx-swap=\"innerHTML\" class=\"text-sm hover:underline btn btn-ghost\">Frågor och svar</button></div><button onclick=\"toggleMenu()\" class=\"md:hidden text-gray-800\">☰</button></nav></div><div id=\"mobile-menu\" class=\"md:hidden max-h-0 opacity-0 transition-all duration-400 ease-in-out px-6 space-y-2 text-sm font-medium text-gray-800\"><a href=\"#home\" class=\"block\">Hem</a> <a href=\"#wedding\" class=\"block\">Bröllopsdag</a> <a href=\"#our-story\" class=\"block\">Vår historia</a> <a href=\"#crew\" class=\"block\">Brudfölje</a> <a href=\"#rsvp\" class=\"block\">OSA</a> <a href=\"#faq\" class=\"block pb-2\">Frågor</a></div></header>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -105,30 +105,30 @@ func Jibberish() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"px-6 py-8 space-y-6 text-gray-700 max-w-3xl mx-auto\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div class=\"px-6 py-8 space-y-6 text-gray-700 max-w-3xl mx-auto\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for i := range 30 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<section><h1>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<section><h1>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", i))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 81, Col: 30}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 95, Col: 30}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac sem eget est egestas vulputate. Sed blandit tellus a libero suscipit, nec pharetra metus placerat. Aliquam erat volutpat. Proin tincidunt, metus ut volutpat gravida, nunc justo fermentum justo, sed tincidunt purus velit id quam. Duis id augue libero. Etiam iaculis lacinia nisi, ac dictum lorem blandit ac.</p></section>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac sem eget est egestas vulputate. Sed blandit tellus a libero suscipit, nec pharetra metus placerat. Aliquam erat volutpat. Proin tincidunt, metus ut volutpat gravida, nunc justo fermentum justo, sed tincidunt purus velit id quam. Duis id augue libero. Etiam iaculis lacinia nisi, ac dictum lorem blandit ac.</p></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
