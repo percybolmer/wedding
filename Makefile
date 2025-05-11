@@ -8,6 +8,7 @@ tailwindcss:
 
 install-deps:
 	npm install -D -g tailwindcss
+	go install golang.org/x/tools/gopls@latest
 
 
 dev: 

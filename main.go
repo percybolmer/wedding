@@ -4,7 +4,9 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/a-h/templ"
 	layouts "github.com/programmingpercy/wedding/templates"
+	"github.com/programmingpercy/wedding/views/crew"
 	"github.com/programmingpercy/wedding/views/faq"
 	"github.com/programmingpercy/wedding/views/history"
 	"github.com/programmingpercy/wedding/views/home"
@@ -21,10 +23,10 @@ func main() {
 	http.HandleFunc("/", Base)
 	http.Handle("/home", LayoutMiddleware(http.HandlerFunc(Home)))
 	http.Handle("/weddingday", LayoutMiddleware(http.HandlerFunc(WeddingDay)))
-	http.HandleFunc("/history", History)
-	http.HandleFunc("/rsvp", Rsvp)
-	http.HandleFunc("/faq", Faq)
-	http.HandleFunc("/crew", Crew)
+	http.Handle("/history", LayoutMiddleware(http.HandlerFunc(History)))
+	http.Handle("/rsvp", LayoutMiddleware(http.HandlerFunc(Rsvp)))
+	http.Handle("/faq", LayoutMiddleware(http.HandlerFunc(Faq)))
+	http.Handle("/crew", LayoutMiddleware(http.HandlerFunc(Crew)))
 
 	slog.Info("Starting on port :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -38,9 +40,13 @@ func LayoutMiddleware(next http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 		} else {
 			// Full page reload, so print layout also
-			home := home.Home()
-			layout := layouts.Base("Test", home)
+			//
+			path := r.URL.Path
 
+			comp := getComponentFromPath(path)
+			layout := layouts.Base("Test", comp)
+
+			slog.Info("Path", "path", path)
 			if err := layout.Render(r.Context(), w); err != nil {
 				slog.Error("Failed to render layout", "error", err.Error())
 			}
@@ -48,9 +54,25 @@ func LayoutMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+func getComponentFromPath(path string) templ.Component {
+	switch path {
+	case "/history":
+		return history.History()
+	case "/weddingday":
+		return weddingday.WeddingDay()
+	case "/rsvp":
+		return rsvp.RSVP()
+	case "/faq":
+		return faq.Faq()
+	case "/crew":
+		return crew.Crew()
+	default:
+		return home.Home()
+	}
+}
+
 func Base(w http.ResponseWriter, r *http.Request) {
 	slog.Info("New visitor", "method", r.Method)
-
 	base := home.Home()
 	component := layouts.Base("test", base)
 	if err := component.Render(r.Context(), w); err != nil {
@@ -106,7 +128,7 @@ func Faq(w http.ResponseWriter, r *http.Request) {
 func Crew(w http.ResponseWriter, r *http.Request) {
 	slog.Info("New visitor", "page", "crew")
 
-	component := faq.Faq()
+	component := crew.Crew()
 	if err := component.Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render crew component", "error", err.Error())
 	}
