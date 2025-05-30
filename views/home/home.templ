@@ -1,7 +1,33 @@
 package home
 
+import (
+  "github.com/programmingpercy/wedding/views/weddingday"
+  "github.com/programmingpercy/wedding/views/history"
+    "github.com/programmingpercy/wedding/views/crew"
+        "github.com/programmingpercy/wedding/views/rsvp"
+                "github.com/programmingpercy/wedding/views/faq"
+)
+
 templ Home() {
-<div class="justify-center flex ">
-  <h2>Hem</h2>
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+  @weddingday.WeddingDay()
+
+  <div class="divider text-2xl">Vår historia</div>
+
+  @history.History()
+
+  <div class="divider text-2xl">Brudfölje</div>
+
+  @crew.Crew()
+
+    <div class="divider text-2xl">OSA</div>
+
+  @rsvp.RSVP()
+
+    <div class="divider text-2xl">Frågor och svar</div>
+
+    @faq.Faq()
+</div>
 </div>
 }

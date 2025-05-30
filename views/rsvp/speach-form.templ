@@ -1,0 +1,23 @@
+package rsvp
+
+templ SpeachForm()  {
+    <form hx-post="/speach" hx-swap="innerHTML" hx-target="#speach-form" hx-ext="json-enc" class="space-y-4">
+        <input type="text" required minlength="2" name="name" placeholder="Namn på talare" class="input input-bordered w-full" />
+                <div class="form-control">
+        <input type="text" required pattern="^[0-9+\-\s]{7,}$" name="phone" placeholder="Telefonnummer" class="input input-bordered w-full  peer invalid:border-red-500 focus:invalid:border-red-500" />
+          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+    Ange ett giltigt telefonnummer
+  </span>
+  </div>
+        <div class="form-control">
+          <input type="email" name="email" placeholder="E-post" required
+            class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+            Ange en giltig e-postadress
+          </span>
+        </div>
+
+        <textarea name="message" placeholder="Meddelande" class="textarea textarea-bordered w-full h-32"></textarea>
+        <button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan om tal</button>
+      </form>
+}

@@ -1,0 +1,32 @@
+package rsvp
+
+templ OsaForm()  {
+    <form hx-post="/osa" hx-swap="innerHTML" hx-target="#osa-form" hx-ext="json-enc" class="space-y-4">
+            <div class="form-control">
+              <input type="text" name="name" placeholder="Alla i sällskapets namn" class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+            Ange ett giltigt namn, minst 2 tecken
+          </span>
+        </div>
+        <div class="form-control">
+          <input type="email" name="email" placeholder="E-post" required
+            class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+            Ange en giltig e-postadress
+          </span>
+        </div>
+        <input type="number" name="count" placeholder="Antal i sällskapet" class="input input-bordered w-full" />
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <input type="radio" name="coming" value="yes" class="radio checked:bg-yellow-600" />
+            <span class="label-text ml-2">Vi kommer</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input type="radio" name="coming" value="no" class="radio checked:bg-yellow-600" />
+            <span class="label-text ml-2 break-words whitespace-normal">Tyvärr kommer vi inte närvara</span>
+          </label>
+        </div>
+        <textarea name="message" placeholder="Meddelande" class="textarea textarea-bordered w-full h-32"></textarea>
+        <button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan</button>
+      </form>
+}

@@ -1,53 +1,50 @@
 package rsvp
 
 templ RSVP() {
-	<div class="container mx-auto px-4 py-8 md:max-w-[50%]">
-		<div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-			<!-- Left Column: Text -->
-			<div>
-				<h2 class="text-3xl font-serif mb-2">Vill ni vara med och förgylla våran stora dag?</h2>
-				<p class="mb-4">
-					Fyll i formuläret på den här sidan för att OSA. Senaste datumet att OSA är
-					<strong>14 februari</strong>.
-					Fyll i alla namn från ett och samma sällskap under
-					<em>Ditt/era namn</em> samt en <em>E-post</em> till en av er.
-				</p>
-				<p class="mb-4">
-					Under <em>Meddelande</em> kan får ni gärna skriva in om ni har eventuella allergier så att ni också kan få något att äta.
-				</p>
-				<p class="text-sm italic">Vill ni hålla tal eller spex, kan ni fylla i formuläret nedanför.</p>
-			</div>
-			<!-- Right Column: Form -->
-			<div>
-				<form hx-post="/rsvp" hx-swap="none" class="space-y-4">
-					<input type="text" name="name" placeholder="Alla i sällskapets namn" class="input input-bordered w-full"/>
-					<div class="form-control">
-						<input
-							type="email"
-							name="email"
-							placeholder="E-post"
-							required
-							class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500"
-						/>
-						<span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
-							Ange en giltig e-postadress
-						</span>
-					</div>
-					<input type="number" name="count" placeholder="Antal i sällskapet" class="input input-bordered w-full"/>
-					<div class="form-control">
-						<label class="label cursor-pointer">
-							<input type="radio" name="coming" value="yes" class="radio checked:bg-yellow-600"/>
-							<span class="label-text ml-2">Vi kommer</span>
-						</label>
-						<label class="label cursor-pointer">
-							<input type="radio" name="coming" value="no" class="radio checked:bg-yellow-600"/>
-							<span class="label-text ml-2 break-words whitespace-normal">Tyvärr kommer vi inte närvara</span>
-						</label>
-					</div>
-					<textarea name="message" placeholder="Meddelande" class="textarea textarea-bordered w-full h-32"></textarea>
-					<button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan</button>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="container mx-auto px-4 py-8 md:max-w-[50%]">
+  <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+
+    <div>
+      <h2 class="text-3xl font-serif mb-2">Vill ni vara med och förgylla våran stora dag?</h2>
+      <p class="mb-4">
+        Fyll i formuläret nedanför för att OSA. Senaste datumet att OSA är
+        <strong>14 februari</strong>.
+        Fyll i alla namn från ett och samma sällskap under
+        <em>Ditt/era namn</em> samt en <em>E-post</em> till en av er.
+      </p>
+      <p class="mb-4">
+        Under <em>Meddelande</em> kan får ni gärna skriva in om ni har eventuella allergier så att ni också kan få något
+        att äta.
+      </p>
+      <p class="text-sm italic">Vill ni hålla tal eller spex, fyll även i formuläret <b>Tal & Spex</b>.</p>
+    </div>
+
+    <div id="osa-form">
+      @OsaForm()
+    </div>
+
+  <div class="divider">Tal & Spex</div>
+
+      <div>
+      <h2 class="text-3xl font-serif mb-2">Vill du eller ni hålla tal?</h2>
+      <p class="mb-4">
+        Fyll i formuläret på nedanför för att ansöka om att hålla tal. Senaste datumet att registrera tal är
+        <strong>20 Maj</strong>.
+        Fyll i alla namn från ett och samma sällskap under
+        <em>Ditt/era namn</em> samt en <em>E-post</em> till en av er.
+        Det är endast våra Toastmasters som får dessa meddelanden och registreringar.
+      </p>
+      <p class="mb-4">
+        Under <em>Meddelande</em> kan får ni har speciella frågor eller något ni vill meddela Toastmasters
+      </p>
+    </div>
+
+
+    <div id="speach-form">
+      @SpeachForm()
+    </div>
+
+    
+  </div>
+</div>
 }

@@ -1,0 +1,12 @@
+package layouts
+
+templ Popup(message string, isError bool) {
+
+    <div id="popup-container" hx-swap-oob="true">
+        <div class={`fixed inset-0 flex items-center justify-center z-50`}>
+            <div class={`rounded shadow-lg p-6 ${if isError}text-red-600${else}text-green-600${end}`}>
+                {message}
+            </div>
+        </div>
+    </div>
+}

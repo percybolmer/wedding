@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log/slog"
 	"net/http"
 
@@ -27,6 +28,8 @@ func main() {
 	http.Handle("/rsvp", LayoutMiddleware(http.HandlerFunc(Rsvp)))
 	http.Handle("/faq", LayoutMiddleware(http.HandlerFunc(Faq)))
 	http.Handle("/crew", LayoutMiddleware(http.HandlerFunc(Crew)))
+	http.Handle("/osa", http.HandlerFunc(Osa))
+	http.Handle("/speach", http.HandlerFunc(Speach))
 
 	slog.Info("Starting on port :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -113,6 +116,69 @@ func Rsvp(w http.ResponseWriter, r *http.Request) {
 	component := rsvp.RSVP()
 	if err := component.Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render rsvp component", "error", err.Error())
+	}
+}
+
+type RSVPRequest struct {
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Count   string `json:"count"`
+	Coming  string `json:"coming"`
+	Message string `json:"message"`
+}
+
+func Osa(w http.ResponseWriter, r *http.Request) {
+	slog.Info("New persons is attending")
+
+	// Email the attendees to an configured email
+	var req RSVPRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		slog.Error("Failed to decode RSVP JSON", "error", err.Error())
+
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+		return
+	}
+
+	slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", req.Count, "coming", req.Coming, "message", req.Message)
+
+	if err := rsvp.OsaForm().Render(r.Context(), w); err != nil {
+		slog.Error("Failed to render new OSA form", "error", err.Error())
+	}
+	if err := layouts.Popup("Tack för din anmälan!", false).Render(r.Context(), w); err != nil {
+		slog.Error("Failed to render success popup", "error", err.Error())
+	}
+}
+
+type SpeachRequest struct {
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Phone   string `json:"phone"`
+	Message string `json:"message"`
+}
+
+func Speach(w http.ResponseWriter, r *http.Request) {
+	slog.Info("New speach registered")
+
+	// Email the attendees to an configured email
+	var req SpeachRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		slog.Error("Failed to decode Speach JSON", "error", err.Error())
+
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+		return
+	}
+
+	slog.Info("Speach received", "name", req.Name, "email", req.Email, "phone", req.Phone, "message", req.Message)
+
+	if err := rsvp.SpeachForm().Render(r.Context(), w); err != nil {
+		slog.Error("Failed to render new OSA form", "error", err.Error())
+	}
+	if err := layouts.Popup("Tack för din anmälan, toastmasters hör av sig innan bröllopet för mer information!", false).Render(r.Context(), w); err != nil {
+		slog.Error("Failed to render success popup", "error", err.Error())
 	}
 }
 
