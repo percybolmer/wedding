@@ -9,6 +9,7 @@ templ Base(title string, comp templ.Component) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
   <link rel="stylesheet" href="/static/assets/css/styles.css" />
+    <link rel="stylesheet" href="/static/assets/css/app.css" />
   <title>Percy Och Michaela</title>
   <script src="/static/assets/js/htmx.org@2.0.4"></script>
   <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
@@ -53,7 +54,8 @@ templ Header() {
     }
   }
 </script>
-<header class="sticky top-0 z-50 bg-gradient-to-r from-amber-200 to-yellow-500 shadow-md">
+<header class="sticky top-0 z-50 golden-background shadow-md">
+  <div class="golden-inner">
   <div class="max-w-7xl mx-auto px-4 py-4 md:py-2 text-center space-y-2 md:space-y-0">
     <!-- Title: Names -->
     <h1 class="text-xl md:text-4xl font-serif tracking-wide text-gray-800 md:mb-8 md:mt-8 md:pl-8">
@@ -106,6 +108,7 @@ templ Header() {
       <a href="#rsvp" class="block">OSA</a>
       <a href="#faq" class="block pb-2">Frågor</a>
     </div>
+  </div>
   </div>
 </header>
 
