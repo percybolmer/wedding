@@ -24,7 +24,7 @@ document.addEventListener('htmx:oobAfterSwap', function(evt) {
 </script>
 </head>
 
-<body>
+<body class="m-0">
   <main class="w-full min-h-screen" hx-boost="true">
     @Header()
     <div id="content">
@@ -54,7 +54,7 @@ templ Header() {
   }
 </script>
 <header class="sticky top-0 z-50 bg-gradient-to-r from-amber-200 to-yellow-500 shadow-md">
-  <div class="max-w-7xl mx-auto px-4 py-4 text-center space-y-2">
+  <div class="max-w-7xl mx-auto px-4 py-4 md:py-2 text-center space-y-2 md:space-y-0">
     <!-- Title: Names -->
     <h1 class="text-xl md:text-4xl font-serif tracking-wide text-gray-800 md:mb-8 md:mt-8 md:pl-8">
       Percy <span class="inline-block text-red-600">❤️</span> Michaela
