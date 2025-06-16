@@ -34,6 +34,28 @@
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
 }
+
+
+.bg-petronella {
+  background: url('/static/assets/images/petronella.jpeg') center top / 100% auto no-repeat fixed;
+  opacity: 0.15;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px; /* Adjust this value for your preferred banner height */
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .bg-petronella {
+    height: 150px; /* Smaller banner on mobile */
+    background-size: 100% auto;
+  }
+}
+
+
 /* 
 .golden-background {
     background-image: repeating-linear-gradient(to right, #a2682a 0%, #be8c3c 8%, #be8c3c 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
