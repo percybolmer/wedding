@@ -13,3 +13,7 @@ install-deps:
 
 dev: 
 	templ generate --watch --cmd="go run main.go"
+
+
+fmt:
+	templ fmt

@@ -9,25 +9,26 @@ import (
 )
 
 templ Home() {
-<div class="container mx-auto px-4 py-8">
-  <div id="weddingday" class="grid grid-cols-1 md:grid-cols-1 gap-8">
-  @weddingday.WeddingDay()
+<div id="home" class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-1 gap-8 mb-4">
 
-  <div id="history" class="divider text-3xl">Vår historia</div>
+  <div id="weddingday" class=" scroll-mt-24 md:scroll-mt-0 mb-4">
+    @weddingday.WeddingDay()
+  </div>
+    <div id="history" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Vår historia</div>
 
-  @history.History()
+    @history.History()
 
-  <div id="crew" class="divider text-3xl">Brudfölje</div>
+    <div id="crew" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Brudfölje</div>
 
-  @crew.Crew()
+    @crew.Crew()
 
-    <div id="rsvp" class="divider text-3xl">OSA</div>
+    <div id="rsvp" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">OSA</div>
 
-  @rsvp.RSVP()
+    @rsvp.RSVP()
 
-    <div id="faq" class="divider text-3xl">Frågor och svar</div>
+    <div id="faq" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Frågor och svar</div>
 
     @faq.Faq()
-</div>
+
 </div>
 }
