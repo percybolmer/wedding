@@ -5,7 +5,11 @@ module.exports = {
     'components/**/*.templ',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        base: '2rem'
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

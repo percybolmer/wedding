@@ -54,50 +54,79 @@ templ Header() {
       menu.classList.remove('max-h-screen', 'opacity-100');
     }
   }
-</script>
-<header class="sticky top-0 z-50 golden-background shadow-md">
-  <div class="golden-inner">
-  <div class="max-w-7xl mx-auto px-4 py-4 md:py-2 text-center space-y-2 md:space-y-0">
-    <!-- Title: Names -->
-    <h1 class="text-xl md:text-4xl font-serif tracking-wide text-gray-800 md:mb-8 md:mt-8 md:pl-8">
-      Percy <span class="inline-block text-red-600">❤️</span> Michaela
-    </h1>
 
-    <!-- Date Line with Fancy Borders -->
-    <div class="flex items-center justify-center text-sm md:text-base text-gray-700 font-medium">
-      <div class="flex-grow border-t border-gray-400 mx-2"></div>
-      <span class="px-2 font-serif italic">23 Maj 2026</span>
-      <div class="flex-grow border-t border-gray-400 mx-2"></div>
+    /* Smooth-scroll handler: if link points to same page fragment, scroll instead of reload */
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a[href^="/#"], a[href^="#"]');
+    if(!a) return;
+    const href = a.getAttribute('href');
+    const url = new URL(href, location.origin);
+    // if link targets current pathname, smooth scroll to section
+    if (url.pathname === location.pathname) {
+      const id = url.hash.replace('#','');
+      if (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  });
+</script>
+<header class="top-0 z-50 golden-background shadow-md sticky md:relative">
+  <div class="golden-inner">
+  <div class="max-w-7xl mx-auto px-4 py-4 md:py-2 text-center md:space-y-2">
+
+
+    <!-- Title + Mobile Button Row -->
+    <div class="flex items-center justify-center relative">
+      <!-- Centered names -->
+      <h1 class="text-xl md:text-4xl font-serif tracking-wide text-gray-800">
+        Percy <span class="inline-block text-red-600">❤️</span> Michaela
+      </h1>
+
+      <!-- Mobile menu button (floated right) -->
+      <button onclick="toggleMenu()" 
+              class="md:hidden text-gray-800 text-xl absolute right-0">
+        ☰
+      </button>
     </div>
 
-    <!-- Nav Bar -->
-    <nav class="flex justify-between md:justify-around items-center text-sm font-medium text-gray-800 pt-2">
-      <!-- Left nav -->
-      <div class="hidden md:flex space-x-6">
-        <button hx-get="/home" hx-target="#content" hx-swap="innerHTML" hx-push-url="home"
-          class="btn btn-ghost hover:underline">Hem</button>
-        <button hx-get="/weddingday" hx-target="#content" hx-swap="innerHTML" hx-push-url="weddingday"
-          class="btn btn-ghost hover:underline">Bröllopsdag</button>
-        <button hx-get="/history" hx-target="#content" hx-swap="innerHTML" hx-push-url="history"
-          class="btn btn-ghost hover:underline">Vår historia</button>
+      <!-- Date Line with Fancy Borders -->
+      <div class="flex items-center justify-center text-sm md:text-base text-gray-700 font-medium">
+        <div class="flex-grow border-t border-gray-400 mx-2"></div>
+        <span class="px-2 font-serif italic">23 Maj 2026</span>
+        <div class="flex-grow border-t border-gray-400 mx-2"></div>
       </div>
 
-      <!-- Centerpiece Logo (optional) -->
-      <div class="text-small md:text-lg font-serif tracking-wide md:hidden"></div>
+      <!-- Nav Bar -->
+      <nav class="hidden md:flex justify-between md:justify-around items-center text-sm font-medium text-gray-800 pt-2">
+        <!-- Left nav -->
+        <div class="hidden md:flex space-x-6">
+          <button hx-get="#home" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">Hem</button>
+          <button hx-get="#weddingday" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">Bröllopsdag</button>
+          <button hx-get="#history" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">Vår historia</button>
+        </div>
 
-      <!-- Right nav -->
-      <div class="hidden md:flex space-x-6">
-        <button hx-get="/crew" hx-target="#content" hx-swap="innerHTML" hx-push-url="crew"
-          class="btn btn-ghost hover:underline">Brudfölje</button>
-        <button hx-get="/rsvp" hx-target="#content" hx-swap="innerHTML" hx-push-url="rsvp"
-          class="btn btn-ghost hover:underline">OSA</button>
-        <button hx-get="/faq" hx-target="#content" hx-swap="innerHTML" hx-push-url="faq"
-          class="btn btn-ghost hover:underline">Frågor & Svar</button>
-      </div>
+        <!-- Centerpiece Logo (optional) -->
+        <div class="text-small md:text-lg font-serif tracking-wide md:hidden"></div>
 
-      <!-- Mobile menu button -->
-      <button onclick="toggleMenu()" class="md:hidden text-gray-800 text-xl">☰</button>
-    </nav>
+        <!-- Right nav -->
+        <div class="hidden md:flex space-x-6">
+          <button hx-get="#crew" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">Brudfölje</button>
+          <button hx-get="#rsvp" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">OSA</button>
+          <button hx-get="#faq" hx-target="#content" hx-swap="none"
+            class="btn btn-ghost hover:underline">Frågor & Svar</button>
+        </div>
+
+
+      </nav>
 
     <!-- Mobile nav -->
     <div id="mobile-menu"
