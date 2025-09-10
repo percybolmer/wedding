@@ -30,7 +30,8 @@ func main() {
 	http.Handle("/crew", LayoutMiddleware(http.HandlerFunc(Crew)))
 	http.Handle("/osa", http.HandlerFunc(Osa))
 	http.Handle("/speach", http.HandlerFunc(Speach))
-
+	http.HandleFunc("/osa/people/new", OsaPeopleNew)
+	http.HandleFunc("/osa/empty", HTMXEmpty)
 	slog.Info("Starting on port :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		slog.Error("Failed to host website", "error", err.Error())
@@ -198,4 +199,12 @@ func Crew(w http.ResponseWriter, r *http.Request) {
 	if err := component.Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render crew component", "error", err.Error())
 	}
+}
+
+func OsaPeopleNew(w http.ResponseWriter, r *http.Request) {
+	rsvp.PersonTile().Render(r.Context(), w)
+}
+
+func HTMXEmpty(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNoContent)
 }

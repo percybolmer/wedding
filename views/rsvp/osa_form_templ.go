@@ -29,7 +29,73 @@ func OsaForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form hx-post=\"/osa\" hx-swap=\"innerHTML\" hx-target=\"#osa-form\" hx-ext=\"json-enc\" class=\"space-y-4\"><div class=\"form-control\"><input type=\"text\" name=\"name\" placeholder=\"Alla i sällskapets namn\" class=\"input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500\"> <span class=\"mt-1 text-sm text-red-500 invisible peer-invalid:visible\">Ange ett giltigt namn, minst 2 tecken</span></div><div class=\"form-control\"><input type=\"email\" name=\"email\" placeholder=\"E-post\" required class=\"input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500\"> <span class=\"mt-1 text-sm text-red-500 invisible peer-invalid:visible\">Ange en giltig e-postadress</span></div><input type=\"number\" name=\"count\" placeholder=\"Antal i sällskapet\" class=\"input input-bordered w-full\"><div class=\"form-control\"><label class=\"label cursor-pointer\"><input type=\"radio\" name=\"coming\" value=\"yes\" class=\"radio checked:bg-yellow-600\"> <span class=\"label-text ml-2\">Vi kommer</span></label> <label class=\"label cursor-pointer\"><input type=\"radio\" name=\"coming\" value=\"no\" class=\"radio checked:bg-yellow-600\"> <span class=\"label-text ml-2 break-words whitespace-normal\">Tyvärr kommer vi inte närvara</span></label></div><textarea name=\"message\" placeholder=\"Meddelande\" class=\"textarea textarea-bordered w-full h-32\"></textarea> <button type=\"submit\" class=\"btn btn-outline btn-primary\">Skicka Anmälan</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form hx-post=\"/osa\" hx-swap=\"innerHTML\" hx-target=\"#osa-form\" hx-ext=\"json-enc\" class=\"space-y-4\"><fieldset class=\"form-control\"><label class=\"label\"><span class=\"label-text\">Personer i sällskapet <span class=\"text-xs opacity-60\">(lägg till en ruta per person)</span></span></label><div id=\"people-grid\" class=\"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 place-items-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = AddPersonTile().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></fieldset><div class=\"form-control\"><input type=\"email\" name=\"email\" placeholder=\"E-post\" required class=\"input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500\"> <span class=\"mt-1 text-sm text-red-500 invisible peer-invalid:visible\">Ange en giltig e-postadress</span></div><div class=\"form-control\"><label class=\"label cursor-pointer\"><input type=\"radio\" name=\"coming\" value=\"yes\" class=\"radio checked:bg-yellow-600\"> <span class=\"label-text ml-2\">Vi kommer</span></label> <label class=\"label cursor-pointer\"><input type=\"radio\" name=\"coming\" value=\"no\" class=\"radio checked:bg-yellow-600\"> <span class=\"label-text ml-2 break-words whitespace-normal\">Tyvärr kommer vi inte närvara</span></label></div><textarea name=\"message\" placeholder=\"Meddelande\" class=\"textarea textarea-bordered w-full h-32\"></textarea> <button type=\"submit\" class=\"btn btn-outline btn-primary\">Skicka Anmälan</button></form>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func PersonTile() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"person-tile relative flex flex-col items-center gap-2 p-4 pt-7 pr-7 rounded-2xl border border-base-300 w-full max-w-xs\"><button type=\"button\" aria-label=\"Ta bort\" class=\"absolute top-2 right-2 z-20 inline-flex h-6 w-6 items-center justify-center\n             rounded-full border border-base-300 bg-base-100 text-base-content/80\n             hover:bg-base-200 hover:text-base-content shadow-sm\" hx-get=\"/osa/empty\" hx-target=\"closest .person-tile\" hx-swap=\"delete\">×</button> <input type=\"text\" name=\"people[]\" placeholder=\"Namn\" minlength=\"2\" required class=\"input input-bordered input-sm w-full text-center peer invalid:border-red-500 focus:invalid:border-red-500\"> <span class=\"hidden text-xs text-red-500 peer-invalid:block\">Minst 2 tecken</span></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func AddPersonTile() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<button type=\"button\" class=\"flex flex-col items-center justify-center gap-2 w-full max-w-xs h-32 rounded-2xl border-2 border-dashed border-base-300 hover:border-primary hover:text-primary transition\" hx-get=\"/osa/people/new\" hx-target=\"this\" hx-swap=\"beforebegin\" hx-on:htmx:afterSwap=\"previousElementSibling?.querySelector(&#39;input&#39;)?.focus()\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" class=\"w-7 h-7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z\"></path> <path d=\"M4.5 20.25a7.5 7.5 0 0 1 15 0\"></path> <path d=\"M19 7v4m2-2h-4\"></path></svg> <span class=\"text-sm\">Lägg till person</span></button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
