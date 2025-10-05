@@ -83,7 +83,11 @@ func Osa(w http.ResponseWriter, r *http.Request) {
 
 	if err := emailService.Send([]string{"osa@pmwedding.se"}, "Ny osning", "", payload); err != nil {
 		slog.Error(fmt.Sprintf("Failed to send email %w", err))
-		// TODO: Print user info so we can still capture them
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+		slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", len(req.People), "coming", req.Coming, "message", req.Message, "people", req.People)
+		return
 	}
 
 	slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", len(req.People), "coming", req.Coming, "message", req.Message)
