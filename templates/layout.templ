@@ -12,8 +12,8 @@ templ Base(title string, comp templ.Component) {
     <link rel="stylesheet" href="/static/assets/css/app.css" />
   <title>Percy Och Michaela</title>
   <script src="/static/assets/js/htmx.org@2.0.4"></script>
+  <script src="/static/assets/js/form-json.js"></script>
   <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
-
     <script>
 document.addEventListener('htmx:oobAfterSwap', function(evt) {
   if (evt.target.id === 'popup-container') {

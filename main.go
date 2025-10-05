@@ -2,32 +2,35 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"net/http"
+	"strings"
 
-	"github.com/a-h/templ"
+	"github.com/joho/godotenv"
+	"github.com/programmingpercy/wedding/email"
 	layouts "github.com/programmingpercy/wedding/templates"
-	"github.com/programmingpercy/wedding/views/crew"
-	"github.com/programmingpercy/wedding/views/faq"
-	"github.com/programmingpercy/wedding/views/history"
 	"github.com/programmingpercy/wedding/views/home"
 	"github.com/programmingpercy/wedding/views/rsvp"
-	"github.com/programmingpercy/wedding/views/weddingday"
 )
+
+var emailService *email.EmailService
 
 func main() {
 	slog.Info("Welcome to Wedding of Pemiz")
+
+	if err := godotenv.Load(); err != nil {
+		slog.Info(fmt.Sprintf(".env not found, using system environment: %v", err))
+	}
+
+	es := email.NewEmailService()
+	emailService = es
 
 	fs := http.FileServer(http.Dir("./static/assets"))
 	http.Handle("/static/assets/", http.StripPrefix("/static/assets/", fs))
 
 	http.HandleFunc("/", Base)
-	http.Handle("/home", LayoutMiddleware(http.HandlerFunc(Home)))
-	http.Handle("/weddingday", LayoutMiddleware(http.HandlerFunc(WeddingDay)))
-	http.Handle("/history", LayoutMiddleware(http.HandlerFunc(History)))
-	http.Handle("/rsvp", LayoutMiddleware(http.HandlerFunc(Rsvp)))
-	http.Handle("/faq", LayoutMiddleware(http.HandlerFunc(Faq)))
-	http.Handle("/crew", LayoutMiddleware(http.HandlerFunc(Crew)))
+
 	http.Handle("/osa", http.HandlerFunc(Osa))
 	http.Handle("/speach", http.HandlerFunc(Speach))
 	http.HandleFunc("/osa/people/new", OsaPeopleNew)
@@ -35,43 +38,6 @@ func main() {
 	slog.Info("Starting on port :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		slog.Error("Failed to host website", "error", err.Error())
-	}
-}
-
-func LayoutMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("HX-Request") == "true" {
-			next.ServeHTTP(w, r)
-		} else {
-			// Full page reload, so print layout also
-			//
-			path := r.URL.Path
-
-			comp := getComponentFromPath(path)
-			layout := layouts.Base("Test", comp)
-
-			slog.Info("Path", "path", path)
-			if err := layout.Render(r.Context(), w); err != nil {
-				slog.Error("Failed to render layout", "error", err.Error())
-			}
-		}
-	})
-}
-
-func getComponentFromPath(path string) templ.Component {
-	switch path {
-	case "/history":
-		return history.History()
-	case "/weddingday":
-		return weddingday.WeddingDay()
-	case "/rsvp":
-		return rsvp.RSVP()
-	case "/faq":
-		return faq.Faq()
-	case "/crew":
-		return crew.Crew()
-	default:
-		return home.Home()
 	}
 }
 
@@ -84,48 +50,12 @@ func Base(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "home")
-
-	component := home.Home()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render home component", "error", err.Error())
-	}
-}
-
-func WeddingDay(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "weddingday")
-
-	component := weddingday.WeddingDay()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render weddingday component", "error", err.Error())
-	}
-}
-
-func History(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "history")
-
-	component := history.History()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render history component", "error", err.Error())
-	}
-}
-
-func Rsvp(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "rsvp")
-
-	component := rsvp.RSVP()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render rsvp component", "error", err.Error())
-	}
-}
-
 type RSVPRequest struct {
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Count   string `json:"count"`
-	Coming  string `json:"coming"`
-	Message string `json:"message"`
+	Name    string   `json:"name"`
+	Email   string   `json:"email"`
+	Coming  string   `json:"coming"`
+	Message string   `json:"message"`
+	People  []string `json:"people"`
 }
 
 func Osa(w http.ResponseWriter, r *http.Request) {
@@ -142,7 +72,21 @@ func Osa(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", req.Count, "coming", req.Coming, "message", req.Message)
+	payload, err := convertRsvpRequestToEmail(req)
+
+	if err != nil {
+		slog.Error("Failed to convert rsvp to email req", "error", err)
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+	}
+
+	if err := emailService.Send([]string{"osa@pmwedding.se"}, "Ny osning", "", payload); err != nil {
+		slog.Error(fmt.Sprintf("Failed to send email %w", err))
+		// TODO: Print user info so we can still capture them
+	}
+
+	slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", len(req.People), "coming", req.Coming, "message", req.Message)
 
 	if err := rsvp.OsaForm().Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render new OSA form", "error", err.Error())
@@ -150,6 +94,14 @@ func Osa(w http.ResponseWriter, r *http.Request) {
 	if err := layouts.Popup("Tack för din anmälan!", false).Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render success popup", "error", err.Error())
 	}
+}
+
+func convertRsvpRequestToEmail(rsvp RSVPRequest) (string, error) {
+	var b strings.Builder
+	if err := email.RsvpEmailTmpl.Execute(&b, rsvp); err != nil {
+		return "", err
+	}
+	return b.String(), nil
 }
 
 type SpeachRequest struct {
@@ -180,24 +132,6 @@ func Speach(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := layouts.Popup("Tack för din anmälan, toastmasters hör av sig innan bröllopet för mer information!", false).Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render success popup", "error", err.Error())
-	}
-}
-
-func Faq(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "faq")
-
-	component := faq.Faq()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render faq component", "error", err.Error())
-	}
-}
-
-func Crew(w http.ResponseWriter, r *http.Request) {
-	slog.Info("New visitor", "page", "crew")
-
-	component := crew.Crew()
-	if err := component.Render(r.Context(), w); err != nil {
-		slog.Error("Failed to render crew component", "error", err.Error())
 	}
 }
 
