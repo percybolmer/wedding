@@ -1,0 +1,13 @@
+package components
+
+templ ImgCard(src, alt, figClass, position, cover string) {
+  <figure class={figClass}>
+    <!-- Choose one: aspect plugin variant -->
+    <div class="relative overflow-hidden rounded-2xl bg-base-100 aspect-[4/3] md:aspect-[3/2]">
+      <img src={src} alt={alt}
+           class={"absolute inset-0 h-full w-full " + cover + " " + position +
+                  " transition-transform duration-300 group-hover:scale-[1.02]"}
+           loading="lazy" decoding="async" />
+    </div>
+  </figure>
+}

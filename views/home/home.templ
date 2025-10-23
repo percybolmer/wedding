@@ -14,21 +14,33 @@ templ Home() {
   <div id="weddingday" class=" scroll-mt-24 md:scroll-mt-0 mb-4">
     @weddingday.WeddingDay()
   </div>
-    <div id="history" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Vår historia</div>
+
+    @GradientDivider("Vår historia", "history")
 
     @history.History()
 
-    <div id="crew" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Brudfölje</div>
+    @GradientDivider("Brudfölje", "crew")
 
     @crew.Crew()
 
-    <div id="rsvp" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">OSA</div>
+    @GradientDivider("OSA", "rsvp")
 
     @rsvp.RSVP()
 
-    <div id="faq" class="divider text-3xl scroll-mt-24 md:scroll-mt-0 mb-4">Frågor och svar</div>
+    @GradientDivider("Frågor och svar", "faq")
 
     @faq.Faq()
 
 </div>
+}
+
+templ GradientDivider(title string, id string) {
+
+    <div id={id} class="divider text-3xl mb-4
+            before:bg-gradient-to-r before:from-transparent before:via-amber-300/70 before:to-transparent before:h-[2px]
+            after:bg-gradient-to-l  after:from-transparent  after:via-amber-300/70  after:to-transparent  after:h-[2px]">
+      {title}
+      
+    </div>
+
 }

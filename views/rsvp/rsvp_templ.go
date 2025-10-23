@@ -29,7 +29,7 @@ func RSVP() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4 py-8 md:max-w-[70%] text-xl text-center overflow-x-hidden\"><div class=\"grid grid-cols-1 md:grid-cols-1 gap-8\"><div><h2 class=\"text-3xl font-serif mb-2\">Vill ni vara med och förgylla våran stora dag?</h2><p class=\"mb-4\">Fyll i formuläret nedanför för att OSA. Senaste datumet är <strong>14 februari</strong>.<br>Lägg till alla namn i sällskapet här nedan samt en <em>E-post</em> som kan användas för att kontakta er.</p><p class=\"mb-4\">Under <em>Meddelande</em> får ni gärna skriva eventuella allergier.</p><p class=\"text-lg italic\">Vill ni hålla tal eller spex, fyll även i formuläret <b>Tal & Spex</b>.</p></div><div id=\"osa-form\" class=\"mx-auto w-full max-w-2xl text-center\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4 py-8 md:max-w-[70%] text-xl text-center overflow-x-hidden\"><div class=\"grid grid-cols-1 md:grid-cols-1 gap-8\"><div><h2 class=\"text-3xl font-serif mb-2\">Vill ni vara med och förgylla vår stora dag?</h2><p class=\"mb-4\">Fyll i formuläret nedanför för att OSA, senast den  <strong>14 februari</strong>.<br>Lägg till alla namn i sällskapet samt en <em>E-post</em> som kan användas för att kontakta er.</p><p class=\"mb-4\">Under <em>Meddelande</em> får ni gärna skriva eventuella allergier.</p><p class=\"text-lg italic\">Vill ni hålla tal eller spex, fyll även i formuläret <b>Tal & Spex</b>.</p></div><div id=\"osa-form\" class=\"mx-auto w-full max-w-2xl text-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -37,7 +37,7 @@ func RSVP() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"divider text-center\">Tal & Spex</div><div><h2 class=\"text-3xl font-serif mb-2\">Vill du eller ni hålla tal eller spex?</h2><p class=\"mb-4\">Fyll i formuläret nedan för att ansöka om att hålla tal eller spex.<br>Senaste datumet att anmäla er är <strong>19 April</strong>.<br>Lägg till samtliga talare i sällskapet nedan<br>Det är endast våra Toastmasters som får dessa registreringar.</p><p class=\"mb-4\">Under <em>Meddelande</em> kan ni ställa eventuella frågor, ange önskemål eller liknande till våra Toastmasters.</p></div><div id=\"speach-form\" class=\"mx-auto w-full max-w-2xl text-center\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"divider text-center\">Tal & Spex</div><div><h2 class=\"text-3xl font-serif mb-2\">Vill ni hålla tal eller spex?</h2><p class=\"mb-4\">Fyll i formuläret nedan för att ansöka om att hålla tal eller spex, senast den <strong>19 April</strong>.<br>Lägg till samtliga talare i sällskapet nedan<br>Det är endast våra Toastmasters som får dessa registreringar.</p><p class=\"mb-4\">Under <em>Meddelande</em> kan ni ställa eventuella frågor, ange önskemål eller liknande till våra Toastmasters.</p></div><div id=\"speach-form\" class=\"mx-auto w-full max-w-2xl text-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

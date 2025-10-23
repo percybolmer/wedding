@@ -1,163 +1,196 @@
 package history
 
+import (
+  "github.com/programmingpercy/wedding/components"
+)
+
 templ History() {
-<div class="container mx-auto px-4 pt-8 md:max-w-[70%] text-xl">
+<div class="container mx-auto px-4 pt-8 md:max-w-[70%] text-[17px] md:text-[18px] leading-relaxed text-gray-800">
 
-  <!-- Row 1: Image left, Text right -->
-  <div class="md:flex md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <h3 class="block md:hidden text-xl font-semibold mb-2">Så träffades vi</h3>
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/viträffas.jpeg" alt="Bild 1"
-               class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="hidden md:block text-xl font-semibold mb-2">Så träffades vi</h3>
-      <p>
-        En fin novemberkväll år 2009 i en alldeles för kort klänning frågar Michaelas pingislags-kompis om vi inte skulle sticka till hennes kompis på förfest innan vi skulle ut på krogen. Två killar mötte upp oss utanför Netto. Den ena killkompisen kramades och hälsade så glatt. Den andra, långa, mörka, snygga killen med en lång lugg vägrade kramas: "Han kramade inte personer han inte känner". Kompisen visade sig vara Percy, och förfesten var i hans lilla rum på lördagsgränd som var fullt av 10st killar fulla på öl. Det tog inte lång tid innan Percy och Michaelas lagkompisar var spårlöst försvunna. Men Michaela festade på, lite för mycket och följde med Percys killkompisar in till stan. Michaela kom dock bara till en stor blomkruka på lilla torg, där hon behövde "vila" lite och Percys fantastiska kompisar ringde till Michaelas pappa så att han fick komma och hämta henne. Killkompisarna lovade att vänta tills han kommit dit. Tur att de inte visste hur lång tid det tog att köra från Våxtorp till Halmstad när de lovade det. Men de väntade fint och han ringa Michaelas pappa ett ex antal gånger innan han var framme.
-      </p>
-    </div>
-  </div>
+  <!-- Row 1: image LEFT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-2 md:row-start-1 text-2xl font-semibold mb-1">
+      Så träffades vi
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
 
-  <!-- Row 2: Text left, Image right -->
-  <div class="md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/balen.jpeg" alt="Bild 2"
-               class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Första dejten</h3>
-      <p>
-        Ett intresse väcktes redan den kvällen för denna snygga och mystiska kille. Chatten på MSN gick varm.
-        Michaela fick kämpa hårt för att få träffa Percy fler gånger. När Michaela var ute i Halmstad i januari år2010 och Percy också var ute så hade han absolut inte tid att komma till B&amp;B där Michaela var. 
-        Men i mars sågs dem, på The Corner och festade och dansade hela natten lång. 
-        <br><br>
-        Hur svårflörtad Percy än spelade så blev vi officiellt tillsammans 11april 2010.
-        Även om Percy väldigt gärna ville ändra datumet till den 9april så att han och hans kompis hade blivit tillsammans med sina flickvänner samma dag.
-      </p>
-    </div>
-  </div>
+    @components.ImgCard(
+      "/static/assets/images/viträffas.jpeg",
+      "Bild 1",
+      "order-2 md:col-start-1 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-top",
+      "object-cover",
+    )
 
-  <!-- Row 3: Image left, Text right -->
-  <div class="md:flex md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/ringbild.jpeg" alt="Bild 3"
-               class="absolute inset-0 h-full w-full object-fit" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Förlovning</h3>
-      <p>
-        9 april 2016 bjöd Percy Michaela på spa på Ärsta vingård för att fira vår 6års-dag. Nästintill det första vi gör på spat är att träffa på Percys storebror Pierres kompis, som skämtsamt säger: Är ni här på en romantisk helg och ska säker förlova er och grejer? Percy skrattade lite obekvämt. Percy hade planerat att göra det väldigt romantiskt och klassiskt och fria på restaurangen på kvällen. Percy blev dock nervös och stressad över att Pierres kompis säkerligen skulle vara på restaurangen och ändrade sin plan. Percy bestämde sig då för att fria när Michaela låg naken och nyduschad på hotellrummet, innan de gick till restaurangen.
-      </p>
-    </div>
-  </div>
+    <p class="order-3 md:col-start-2 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      En fin novemberkväll år 2009 i en alldeles för kort klänning frågar Michaelas pingis-kompis om de inte skulle sticka till hennes kompis på förfest innan de skulle ut på krogen. Två killar mötte upp dem utanför Netto. Den ena killkompisen kramades och hälsade så glatt. Den andra, långa, mörka, snygga killen med en lång lugg vägrade kramas: "Jag kramar inte personer jag inte känner". Kompisen visade sig vara Percy, och förfesten var i hans lilla rum på lördagsgränd som var fullt av 10st fulla killar. Det tog inte lång tid innan Percy och Michaelas lagkompis var spårlöst försvunna. Men Michaela festade på, lite för mycket och följde med Percys killkompisar in till stan. Michaela kom dock bara till en stor blomkruka på lilla torg, där hon behövde "vila" lite och Percys fantastiska kompisar ringde till Michaelas pappa så att han fick komma och hämta henne. Killkompisarna lovade att vänta tills Michaelas pappa kommit dit. Tur att de inte visste hur lång tid det tog att köra från Våxtorp till Halmstad när de lovade det. Men de väntade snällt och de hann ringa Michaelas pappa ett ex antal gånger innan han var framme.
+    </p>
+  </section>
 
-  <!-- Row 4: Text left, Image right -->
-  <div class="md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/gravid.jpeg" alt="Bild 4"
-               class="absolute inset-0 h-full w-full object-fit" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Vad får man om man korsar en Apa och en Våxtorpare?</h3>
-      <p>
-        Percy var fastbestämd på att han aldrig ville ha barn.
-        Michaela var väldigt säker och bestämd på att hon ville ha barn. På något vis så vann Michaela denna fighten och började hålla koll på när hon hade ägglossning.
-        <br><br>
-        Den 3 april hade Michaela ägglossning. Samma dag som Michaela skulle på Chippendales - "en dansgrupp med 12 sexiga män" med sina tjejkompisar. Denna kväll kom Michaela hem glad och fnittrig, men blev snabbt besviken då Percy låg hemma och tyckte synd om sig själv och hade feber. Första och enda gången Percy sagt nej.. Utan för mycket information så kan man räkna ut hur den kvällen slutade. 12 januari 2018 föddes världens sötaste dotter, Freja.
-      </p>
-    </div>
-  </div>
+  <!-- Row 2: image RIGHT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-1 md:row-start-1 text-2xl font-semibold mb-1">
+      Första dejten
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
 
-  <!-- Row 5: Image left, Text right -->
-  <div class="md:flex md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/frejabitersticka.jpeg" alt="Bild 4"
-               class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Varför vänta?</h3>
-      <p>
-        En vacker dag i slutet på 2018 kom Michaela hem och frågade Percy vad de väntade på. Varför "måste" man vänta med att skaffa syskon så att det blir ungefär 3år mellan barnen? Tillsammans kom vi fram till att vi inte måste vänta med att försöka skaffa ett syskon till Freja. 
-      </p>
-    </div>
-  </div>
+    @components.ImgCard(
+      "/static/assets/images/balen.jpeg",
+      "Bild 2",
+      "order-2 md:col-start-2 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-top",
+            "object-cover",
+    )
 
-  <!-- Row 6: Text left, Image right -->
-  <div class="md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/familjebild.jpeg" alt="Bild 4"
-               class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">En liten påg och Hus</h3>
-      <p>
-        När Michaela hade blivit gravid så kom de på att det inte är optimalt att bo i en otroligt varm lägenhet i Halmstad, utan hiss med två små barn. Då började de frenetiskt leta hus i södra Halland, runt Michaelas hemtrakter men nära en tågstation så att Percy kunde fortsätta pendla till norra Halland. En dag var de var hos sina kompisar Malin och Johannes som frågade om de hade sett ett stort och fint hus som låg i Östra karup. Redan på Hemnet så kände Michaela och Percy för första gången att detta kunde vara ett hus för dem. Även på husvisningen så kändes det som rätt hus och någon vecka senare så vann de husvisningen. 
-        Inflyttningen skedde den 29maj och några månader senare den 16augusti föddes vår fantastiska och busiga son, Dante.
-      </p>
-    </div>
-  </div>    
+    <p class="order-3 md:col-start-1 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      Ett intresse väcktes redan den kvällen. Chatten på MSN gick varm.
+      Michaela fick kämpa hårt för att få träffa Percy fler gånger. När Michaela var ute i Halmstad i januari 2010 och Percy också var ute så hade han absolut inte tid att komma till B&amp;B där Michaela var. 
+      Men i mars sågs dem, på The Corner och festade och dansade hela natten lång. 
+      <br><br>
+      Hur svårflörtad Percy än spelade så blev vi officiellt tillsammans 11 april 2010.
+      Även om Percy väldigt gärna ville ändra datumet till den 9 april så att han och hans kompis hade blivit tillsammans med sina flickvänner samma dag.
+    </p>
+  </section>
 
-  <!-- Row 7: Text left, Image right -->
-  <div class="md:flex md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/bröllopsbild.jpeg" alt="Bild 4"
-               class="absolute inset-0 h-full w-full object-cover object-center" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Giftemål!</h3>
-      <p>
-        Då de blev tillsammans den 11april och förlovade sig den 9 april så föddes idéen att det se vilket år den 10april var en lördag, vilket visade sig vara 2027. Så länge var tanken att gifta sig den 10april 2027. Men sen kom de på att det kan vara kallt och tråkigt att gifta sig i april. Så då ändrades idéen
-        Michaela
-        till att gifta sig en pingst då både Michaelas föräldrar och Percys föräldrar gifte sig en pingst!
-        Då kunde de också skicka ut en fantastisk Save the date video på deras 15års-dag.
-      </p>
-    </div>
-  </div>
+  <!-- Row 3: image LEFT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-2 md:row-start-1 text-2xl font-semibold mb-1">
+      Förlovning
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
 
-  <!-- Row 8: Text left, Image right -->
-  <div class="md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8">
-    <div class="md:w-1/2 mb-4 md:mb-0">
-      <div class="mx-auto w-full max-w-[500px]">
-        <div class="relative w-full pb-[75%] overflow-hidden rounded shadow">
-          <img src="/static/assets/images/petronella.jpeg" alt="Bild 4"
-               class="absolute inset-0 h-full w-full object-fit" loading="lazy" />
-        </div>
-      </div>
-    </div>
-    <div class="md:w-1/2">
-      <h3 class="text-xl font-semibold mb-2">Framtiden</h3>
-      <p>
+    @components.ImgCard(
+      "/static/assets/images/ringbild.jpeg",
+      "Bild 3",
+      "order-2 md:col-start-1 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-center",
+            "object-cover",
+    )
+
+    <p class="order-3 md:col-start-2 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      9 april 2016 bjöd Percy Michaela på spa på Ärsta vingård för att fira deras 6års-dag. Nästintill det första de gör på spaet är att träffa på Percys storebror Pierres kompis, som skämtsamt säger: Är ni här på en romantisk helg och ska säker förlova er och grejer? Percy skrattade lite obekvämt. Percy hade planerat att göra det väldigt romantiskt och klassiskt och fria på restaurangen på kvällen. Percy blev dock nervös och stressad över att Pierres kompis säkerligen skulle vara på restaurangen och ändrade sin plan. Percy bestämde sig då för att fria när Michaela låg naken och nyduschad på hotellrummet, innan de gick till restaurangen.
+    </p>
+  </section>
+
+  <!-- Row 4: image RIGHT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-1 md:row-start-1 text-2xl font-semibold mb-1">
+      Vad får man om man korsar en Apa och en Våxtorpare?
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
+
+    @components.ImgCard(
+      "/static/assets/images/gravid.jpeg",
+      "Bild 4",
+      "order-2 md:col-start-2 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-center",
+            "object-cover",
+    )
+
+    <p class="order-3 md:col-start-1 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      Percy var bestämd på att han aldrig ville ha barn.
+      Michaela var väldigt säker och bestämd på att hon ville ha barn. På något vis så vann Michaela denna fighten och började hålla koll på när hon hade ägglossning.
+      <br><br>
+      Den 3 april hade Michaela det, det var samma dag som Michaela skulle på Chippendales - "en dansgrupp med 12 sexiga män" med sina tjejkompisar. Denna kväll kom Michaela hem glad och fnittrig, men blev snabbt besviken då Percy låg hemma och tyckte synd om sig själv och hade feber. Första och enda gången Percy sagt nej.. Utan för mycket information så kan man räkna ut hur den kvällen slutade. 12 januari 2018 föddes världens sötaste dotter, Freja.
+    </p>
+  </section>
+
+  <!-- Row 5: image LEFT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-2 md:row-start-1 text-2xl font-semibold mb-1">
+      Varför vänta?
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
+
+    @components.ImgCard(
+      "/static/assets/images/frejabitersticka.jpeg",
+      "Bild 4",
+      "order-2 md:col-start-1 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-top",
+            "object-cover",
+    )
+
+    <p class="order-3 md:col-start-2 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      En vacker dag i slutet på 2018 kom Michaela hem och frågade Percy vad de väntade på. Varför "måste" man vänta med att skaffa syskon så att det blir ungefär 3år mellan barnen? Tillsammans kom de fram till att de inte måste vänta med att försöka skaffa ett syskon till Freja. 
+    </p>
+  </section>
+
+  <!-- Row 6: image RIGHT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-1 md:row-start-1 text-2xl font-semibold mb-1">
+      En liten påg och Hus
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
+
+    @components.ImgCard(
+      "/static/assets/images/familjebild.jpeg",
+      "Bild 4",
+      "order-2 md:col-start-2 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-top",
+            "object-cover",
+    )
+
+    <p class="order-3 md:col-start-1 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      När Michaela hade blivit gravid så kom de på att det inte är optimalt att bo i en otroligt varm lägenhet i Halmstad, utan hiss med två små barn. Då började de frenetiskt leta hus i södra Halland, runt Michaelas hemtrakter men nära en tågstation så att Percy kunde fortsätta pendla till norra Halland. En dag var de var hos sina kompisar Malin och Johannes som frågade om de hade sett ett stort och fint hus som låg i Östra karup. Redan på Hemnet så kände Michaela och Percy för första gången att detta kunde vara ett hus för dem. Även på husvisningen så kändes det som rätt hus och någon vecka senare så vann de budgivningen. 
+      Inflyttningen skedde den 29 maj och några månader senare den 16 augusti föddes vår fantastiska och busiga son, Dante.
+    </p>
+  </section>
+
+  <!-- Row 7: image LEFT @md -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-14">
+    <h3 class="order-1 md:col-start-2 md:row-start-1 text-2xl font-semibold mb-1">
+      Giftemål!
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
+
+    @components.ImgCard(
+      "/static/assets/images/bröllopsbild.jpeg",
+      "Bild 4",
+      "order-2 md:col-start-1 md:row-start-1 md:row-span-2 mb-6 mt-6 md:mt-0",
+      "object-center",
+            "object-cover",
+    )
+
+    <p class="order-3 md:col-start-2 md:row-start-2 first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+               first-letter:mr-2 first-letter:float-left">
+      Då de blev tillsammans den 11 april och förlovade sig den 9 april så föddes idéen att det se vilket år den 10 april var en lördag, vilket visade sig vara 2027. Under lång tid var tanken att gifta sig den 10 april 2027. Men ännu en gång började de fundera på vad de väntade på, och de kom på att det kan vara kallt och tråkigt att gifta sig i april. Så då ändrades idéen
+      till att gifta sig en pingst då både Michaelas föräldrar och Percys föräldrar gifte sig en pingst!
+      Då kunde de också skicka ut en fantastisk Save the date video på deras 15års-dag.
+    </p>
+  </section>
+
+  <!-- Row 8: image RIGHT @md (top-aligned text wrapper) -->
+  <section class="grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-4">
+    <h3 class="order-1 md:hidden text-2xl font-semibold mb-3">
+      Framtiden
+      <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+    </h3>
+
+    @components.ImgCard(
+      "/static/assets/images/petronella.jpeg",
+      "Bild 4",
+      "order-2 md:col-start-2 md:row-start-1 md:row-span-2 mt-6 md:mt-0",
+      "object-center",
+            "object-cover",
+    )
+
+    <div class="order-3 md:col-start-1 md:row-start-1 md:row-span-2">
+      <h3 class="hidden md:block text-2xl font-semibold mb-3">
+        Framtiden
+        <span class="block h-0.5 w-16 mt-2 rounded bg-amber-400/80"></span>
+      </h3>
+      <p class="first-letter:text-5xl first-letter:font-serif first-letter:leading-[0.8]
+                 first-letter:mr-2 first-letter:float-left">
         Resten är historia som ni nu ska få äran att vara med och skapa
       </p>
     </div>
-  </div>
+  </section>
+
 </div>
 }

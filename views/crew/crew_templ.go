@@ -8,6 +8,10 @@ package crew
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import (
+	"github.com/programmingpercy/wedding/components"
+)
+
 func Crew() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -29,7 +33,119 @@ func Crew() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4 pt-8 md:max-w-[70%] text-xl\"><!-- Row 1: Image left, Text right --><div class=\"md:flex md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/toastmasters.jpg\" alt=\"Vårat Toast team\" class=\"absolute inset-0 h-full w-full object-fit\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">ToastTeamet</h3><p>Malin Haraldsson och Kristoffer Råsäter, vårat strålande toast team</p></div></div><!-- Row 2: Text left, Image right --><div class=\"md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/patrik.jpeg\" alt=\"Patrik, bestman\" class=\"absolute inset-0 h-full w-full object-fit\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Bestman</h3><p>Patrik är en spillevink</p></div></div><!-- Row 3: Image left, Text right --><div class=\"md:flex md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/kurtan.jpeg\" alt=\"Kurtan, tärna\" class=\"absolute inset-0 h-full w-full object-cover object-top\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Tärna</h3><p>Kurtan, en tärna</p></div></div><!-- Row 4: Text left, Image right --><div class=\"md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/anton.jpeg\" alt=\"Anton, bestman\" class=\"absolute inset-0 h-full w-full object-cover object-top\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Bestman</h3><p>Anton är en best</p></div></div><!-- Row 5: Image left, Text right --><div class=\"md:flex md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/emelieU.jpeg\" alt=\"Emelie, tärna\" class=\"absolute inset-0 h-full w-full object-cover object-center\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Tärna</h3><p>Emelie, en tärna</p></div></div><!-- Row 6: Text left, Image right --><div class=\"md:flex md:flex-row-reverse md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/emil.jpeg\" alt=\"Emil\" class=\"absolute inset-0 h-full w-full object-cover object-center\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Bestman</h3><p>Emil</p></div></div><!-- Row 7: Image left, Text right --><div class=\"md:flex md:items-center md:gap-8 mb-8\"><div class=\"md:w-1/2 mb-4 md:mb-0\"><div class=\"mx-auto w-full max-w-[500px]\"><div class=\"relative w-full pb-[75%] overflow-hidden rounded shadow\"><img src=\"/static/assets/images/johanna.jpg\" alt=\"Johanna, tärna\" class=\"absolute inset-0 h-full w-full object-cover object-center\" loading=\"lazy\"></div></div></div><div class=\"md:w-1/2\"><h3 class=\"text-xl font-semibold mb-2\">Tärna</h3><p>Johanna, en tärna</p></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4 pt-8 md:max-w-[70%] text-[17px] md:text-[18px] leading-relaxed text-gray-800\"><!-- Row 1: image LEFT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><!-- Mobile title --><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">ToastTeamet <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/toastmasters.jpg",
+			"Vårt Toast-team",
+			"order-2 md:col-start-1 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<!-- Text wrapper spans both rows so content starts at top --><div class=\"order-3 md:col-start-2 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">ToastTeamet <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Malin Haraldsson och Kristoffer Råsäter – vårt strålande toast-team.</p></div></section><!-- Row 2: image RIGHT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/patrik.jpeg",
+			"Patrik, bestman",
+			"order-2 md:col-start-2 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"order-3 md:col-start-1 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Patrik – en rackarunge med stort hjärta.</p></div></section><!-- Row 3: image LEFT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/kurtan.jpeg",
+			"Kurtan, tärna",
+			"order-2 md:col-start-1 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-top",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"order-3 md:col-start-2 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Emelie a.k.a. Kurtan – en klippa i stormen.</p></div></section><!-- Row 4: image RIGHT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/anton.jpeg",
+			"Anton, bestman",
+			"order-2 md:col-start-2 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-top",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div class=\"order-3 md:col-start-1 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Anton – en best i både namn och stil.</p></div></section><!-- Row 5: image LEFT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/emelieU.jpeg",
+			"Emelie, tärna",
+			"order-2 md:col-start-1 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div class=\"order-3 md:col-start-2 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Emelie – en spillevink som alltid bjuder på skratt.</p></div></section><!-- Row 6: image RIGHT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/emil.jpeg",
+			"Emil, bestman",
+			"order-2 md:col-start-2 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<div class=\"order-3 md:col-start-1 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Bestman <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Emil – vem fan är de?</p></div></section><!-- Row 7: image LEFT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-14\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/johanna.jpeg",
+			"Johanna, tärna",
+			"order-2 md:col-start-1 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<div class=\"order-3 md:col-start-2 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Tärna <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Johanna – har funnits vid brudens sida sedan hon tittade ut.</p></div></section><!-- Row 8: image RIGHT @md --><section class=\"grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-4\"><h3 class=\"order-1 md:hidden text-2xl font-semibold mb-3\">Brudnäbbar <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ImgCard(
+			"/static/assets/images/dantefreja.jpeg",
+			"Brudnäbbar",
+			"order-2 md:col-start-2 md:row-start-1 md:row-span-2 mt-2 md:mt-0",
+			"object-center",
+			"object-cover",
+		).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<div class=\"order-3 md:col-start-1 md:row-start-1 md:row-span-2\"><h3 class=\"hidden md:block text-2xl font-semibold mb-3\">Brudnäbbar <span class=\"block h-0.5 w-16 mt-2 rounded bg-amber-400/80\"></span></h3><p>Freja &amp; Dante – världens sötaste barn!</p></div></section></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
