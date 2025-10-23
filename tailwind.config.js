@@ -11,6 +11,7 @@ module.exports = {
       }
     },
   },
+  safelist: ['md:block', 'sm:block', 'md:hidden', 'sm:hidden'],
   plugins: [require("daisyui")],
   daisyui: {
     styled: true,

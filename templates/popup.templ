@@ -1,11 +1,43 @@
 package layouts
 
 templ Popup(message string, isError bool) {
-
     <div id="popup-container" hx-swap-oob="true">
-        <div class={`fixed inset-0 flex items-center justify-center z-50`}>
-            <div class={`rounded shadow-lg p-6 ${if isError}text-red-600${else}text-green-600${end}`}>
-                {message}
+        <!-- Dimmed + blurred backdrop -->
+        <div class="fixed inset-0 z-50 grid place-items-center p-4 bg-slate-950/70 backdrop-blur-sm">
+            <!-- Decorative gradient glow -->
+            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,_rgb(168_85_247/0.25)_0%,_transparent_60%)]"></div>
+
+            <!-- Card -->
+            <div
+                role="alertdialog"
+                aria-live="polite"
+                class={`relative w-full max-w-md rounded-2xl shadow-2xl ring-1 ring-white/10
+                        bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl
+                        transition transform duration-200 ease-out
+                        animate-in fade-in zoom-in-95`}
+            >
+                <!-- Accent bar -->
+                <div class={`h-1 w-full rounded-t-2xl
+                             ${if isError}bg-gradient-to-r from-rose-500 via-red-500 to-orange-500
+                             ${else}bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500
+                             ${end}`}></div>
+
+                <div class="p-6 flex items-start gap-3">
+                    <div class={`mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full
+                                 ${if isError}bg-rose-100 text-rose-600 dark:bg-rose-500/15 dark:text-rose-400
+                                 ${else}bg-emerald-100 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400
+                                 ${end}`}>
+                        <!-- simple icon dot -->
+                        <span class="text-xl">•</span>
+                    </div>
+
+                    <div class={`text-base leading-relaxed
+                                 ${if isError}text-rose-700 dark:text-rose-300
+                                 ${else}text-emerald-700 dark:text-emerald-300
+                                 ${end}`}>
+                        {message}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

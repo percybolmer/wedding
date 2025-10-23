@@ -1,23 +1,110 @@
 package rsvp
 
-templ SpeachForm()  {
-    <form hx-post="/speach" hx-swap="innerHTML" hx-target="#speach-form" hx-ext="json-enc" class="space-y-4">
-        <input type="text" required minlength="2" name="name" placeholder="Namn på talare" class="input input-bordered w-full" />
-                <div class="form-control">
-        <input type="text" required pattern="^[0-9+\-\s]{7,}$" name="phone" placeholder="Telefonnummer" class="input input-bordered w-full  peer invalid:border-red-500 focus:invalid:border-red-500" />
-          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
-    Ange ett giltigt telefonnummer
-  </span>
-  </div>
-        <div class="form-control">
-          <input type="email" name="email" placeholder="E-post" required
-            class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
-          <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
-            Ange en giltig e-postadress
-          </span>
-        </div>
+templ SpeachForm() {
+  <form
+    hx-post="/speach"
+    hx-swap="innerHTML"
+    hx-target="#speach-form"
+    hx-ext="form-json"
+    class="space-y-4"
+  >
+    <fieldset class="form-control">
+      <label class="label">
+        <span class="label-text">
+          Talare
+          <span class="text-xs opacity-60">(lägg till en ruta per talare)</span>
+        </span>
+      </label>
 
-        <textarea name="message" placeholder="Meddelande" class="textarea textarea-bordered w-full h-32"></textarea>
-        <button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan om tal</button>
-      </form>
+      <div id="speach-people-grid"
+           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 place-items-center">
+        @SpeachPersonTile()
+        @SpeachAddPersonTile()
+      </div>
+    </fieldset>
+
+    <div class="form-control">
+      <input type="text" required minlength="2" name="contact_name" placeholder="Kontaktperson"
+        class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+      <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+        Ange minst 2 tecken
+      </span>
+    </div>
+
+    <div class="form-control">
+      <input type="text" required pattern="^[0-9+\\-\\s]{7,}$" name="phone" placeholder="Telefonnummer"
+        class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+      <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+        Ange ett giltigt telefonnummer
+      </span>
+    </div>
+
+    <div class="form-control">
+      <input type="email" name="email" placeholder="E-post" required
+        class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+      <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
+        Ange en giltig e-postadress
+      </span>
+    </div>
+
+    <textarea name="message" placeholder="Meddelande (ämne, önskad tid, teknikbehov…)"
+      class="textarea textarea-bordered w-full h-32"></textarea>
+
+    <button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan om tal</button>
+  </form>
+}
+
+templ SpeachPersonTile() {
+  <div class="speach-person-tile relative overflow-visible flex flex-col items-center gap-2
+              p-4 pt-8 pr-8 rounded-2xl border border-base-300 bg-base-100
+              w-full max-w-xs">
+
+    <button type="button" aria-label="Ta bort"
+      class="absolute top-2 right-2 z-30 pointer-events-auto grid h-6 w-6 place-items-center
+             rounded-full border border-base-300 bg-base-100 text-base-content/80
+             hover:bg-base-200 hover:text-base-content shadow-sm"
+      hx-on:click="this.closest('.speach-person-tile')?.remove()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+           class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+
+    <input
+      type="text"
+      name="people[]"
+      placeholder="Namn på talare"
+      minlength="2"
+      required
+      aria-invalid="false"
+      oninput="this.setAttribute('aria-invalid', this.validity.valid ? 'false' : 'true')"
+      onblur="this.setAttribute('aria-invalid', this.validity.valid ? 'false' : 'true')"
+      class="peer input input-bordered input-sm w-full text-center
+             invalid:border-red-500 focus:invalid:border-red-500" />
+
+    <span class="hidden text-xs text-red-500 peer-aria-[invalid=true]:block">
+      Minst 2 tecken
+    </span>
+  </div>
+}
+
+templ SpeachAddPersonTile() {
+  <button type="button"
+    class="flex flex-col items-center justify-center gap-2 w-full max-w-xs h-32
+           rounded-2xl border-2 border-dashed border-base-300
+           transition-transform duration-150 hover:scale-105
+           hover:border-primary hover:text-primary"
+    hx-get="/speach/people/new"
+    hx-target="this"
+    hx-swap="beforebegin"
+    hx-on:htmx:afterSwap="previousElementSibling?.querySelector('input')?.focus()"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+      <path d="M4.5 20.25a7.5 7.5 0 0 1 15 0" />
+      <path d="M19 7v4m2-2h-4" />
+    </svg>
+    <span class="text-sm">Lägg till talare</span>
+  </button>
 }

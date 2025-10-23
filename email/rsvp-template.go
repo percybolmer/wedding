@@ -18,3 +18,20 @@ var RsvpEmailTmpl = template.Must(template.New("rsvp-email").Parse(`
   <p>{{.Message}}</p>
 {{end}}
 `))
+
+var SpeechEmailTmpl = template.Must(template.New("speech-email").Parse(`
+<h2>Nytt tal</h2>
+<p><strong>E-post:</strong> {{.Email}}</p>
+<p><strong>Telefon:</strong> {{.Phone}}</p>
+<p><strong>Antal:</strong> {{len .People}}</p>
+{{if .People}}
+  <h3>Personer</h3>
+  <ul>
+    {{range .People}}<li>{{.}}</li>{{end}}
+  </ul>
+{{end}}
+{{if .Message}}
+  <h3>Meddelande</h3>
+  <p>{{.Message}}</p>
+{{end}}
+`))

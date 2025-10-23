@@ -2,32 +2,37 @@ package rsvp
 
 templ OsaForm()  {
 
-  <form hx-post="/osa" hx-swap="innerHTML" hx-target="#osa-form" hx-ext="form-json" class="space-y-4"
-  
+  <form
+    hx-post="/osa"
+    hx-swap="innerHTML"
+    hx-target="#osa-form"
+    hx-ext="form-json"
+    class="space-y-4 max-w-full"
   >
-    <fieldset class="form-control">
+    <fieldset class="form-control min-w-0">
       <label class="label">
         <span class="label-text">
-          Personer i sällskapet
+          Gäster
           <span class="text-xs opacity-60">(lägg till en ruta per person)</span>
         </span>
       </label>
 
-    <div id="people-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 place-items-center">
-      @AddPersonTile()
-    </div>
+      <div id="people-grid"
+        class="grid gap-3 place-items-stretch max-w-full min-w-0
+               [grid-template-columns:repeat(auto-fill,minmax(min(16rem,100%),1fr))]">
+        @AddPersonTile()
+      </div>
     </fieldset>
 
-    <div class="form-control">
+    <div class="form-control min-w-0">
       <input type="email" name="email" placeholder="E-post" required
-        class="input input-bordered w-full peer invalid:border-red-500 focus:invalid:border-red-500" />
+        class="input input-bordered w-full max-w-full min-w-0 peer invalid:border-red-500 focus:invalid:border-red-500" />
       <span class="mt-1 text-sm text-red-500 invisible peer-invalid:visible">
         Ange en giltig e-postadress
       </span>
     </div>
 
-    <div class="form-control">
+    <div class="form-control min-w-0">
       <label class="label cursor-pointer">
         <input type="radio" name="coming" value="yes" class="radio checked:bg-yellow-600" />
         <span class="label-text ml-2">Vi kommer</span>
@@ -38,7 +43,9 @@ templ OsaForm()  {
       </label>
     </div>
 
-    <textarea name="message" placeholder="Meddelande" class="textarea textarea-bordered w-full h-32"></textarea>
+    <textarea name="message" placeholder="Meddelande"
+      class="textarea textarea-bordered w-full max-w-full min-w-0 h-32"></textarea>
+
     <button type="submit" class="btn btn-outline btn-primary">Skicka Anmälan</button>
   </form>
 }
@@ -46,17 +53,15 @@ templ OsaForm()  {
 
 
 templ PersonTile() {
-<div class="person-tile relative overflow-visible flex flex-col items-center gap-2
+  <div class="person-tile relative overflow-visible flex flex-col items-center gap-2
               p-4 pt-8 pr-8 rounded-2xl border border-base-300 bg-base-100
-              w-full max-w-xs">
+              w-full max-w-full min-w-0">
 
     <button type="button" aria-label="Ta bort"
       class="absolute top-2 right-2 z-30 pointer-events-auto grid h-6 w-6 place-items-center
              rounded-full border border-base-300 bg-base-100 text-base-content/80
              hover:bg-base-200 hover:text-base-content shadow-sm"
-      hx-get="/osa/empty"
-      hx-target="closest .person-tile"
-      hx-swap="delete">
+      hx-on:click="this.closest('.person-tile')?.remove()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
            class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M6 6l12 12M18 6L6 18" />
@@ -72,7 +77,7 @@ templ PersonTile() {
       aria-invalid="false"
       oninput="this.setAttribute('aria-invalid', this.validity.valid ? 'false' : 'true')"
       onblur="this.setAttribute('aria-invalid', this.validity.valid ? 'false' : 'true')"
-      class="peer input input-bordered input-sm w-full text-center
+      class="peer input input-bordered input-sm w-full max-w-full min-w-0 text-center
              invalid:border-red-500 focus:invalid:border-red-500" />
 
     <span class="hidden text-xs text-red-500 peer-aria-[invalid=true]:block">
@@ -83,13 +88,17 @@ templ PersonTile() {
 
 templ AddPersonTile() {
   <button type="button"
-    class="flex flex-col items-center justify-center gap-2 w-full max-w-xs h-32 rounded-2xl border-2 border-dashed border-base-300 hover:border-primary hover:text-primary transition"
+    class="flex flex-col items-center justify-center gap-2 w-full max-w-full min-w-0 h-32
+           rounded-2xl border-2 border-dashed border-base-300
+           transition-transform duration-150 hover:scale-105
+           hover:border-primary hover:text-primary"
     hx-get="/osa/people/new"
     hx-target="this"
     hx-swap="beforebegin"
     hx-on:htmx:afterSwap="previousElementSibling?.querySelector('input')?.focus()"
-    >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5">
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
       <path d="M4.5 20.25a7.5 7.5 0 0 1 15 0" />
       <path d="M19 7v4m2-2h-4" />

@@ -35,6 +35,7 @@ func main() {
 	http.Handle("/speach", http.HandlerFunc(Speach))
 	http.HandleFunc("/osa/people/new", OsaPeopleNew)
 	http.HandleFunc("/osa/empty", HTMXEmpty)
+	http.HandleFunc("/speach/people/new", OsaPeopleNew)
 	slog.Info("Starting on port :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		slog.Error("Failed to host website", "error", err.Error())
@@ -109,10 +110,11 @@ func convertRsvpRequestToEmail(rsvp RSVPRequest) (string, error) {
 }
 
 type SpeachRequest struct {
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Phone   string `json:"phone"`
-	Message string `json:"message"`
+	Name    string   `json:"name"`
+	Email   string   `json:"email"`
+	Phone   string   `json:"phone"`
+	Message string   `json:"message"`
+	People  []string `json:"people"`
 }
 
 func Speach(w http.ResponseWriter, r *http.Request) {
@@ -131,6 +133,24 @@ func Speach(w http.ResponseWriter, r *http.Request) {
 
 	slog.Info("Speach received", "name", req.Name, "email", req.Email, "phone", req.Phone, "message", req.Message)
 
+	payload, err := convertSpeechpRequestToEmail(req)
+
+	if err != nil {
+		slog.Error("Failed to convert rsvp to email req", "error", err)
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+	}
+
+	if err := emailService.Send([]string{"osa@pmwedding.se"}, "Nytt tal", "", payload); err != nil {
+		slog.Error(fmt.Sprintf("Failed to send email %w", err))
+		if err := layouts.Popup("Något gick fel med anmälan, vänligen försök igen senare!", true).Render(r.Context(), w); err != nil {
+			slog.Error("Failed to render success popup", "error", err.Error())
+		}
+		slog.Info("RSVP received", "name", req.Name, "email", req.Email, "count", len(req.People), "phone", req.Phone, "message", req.Message, "people", req.People)
+		return
+	}
+
 	if err := rsvp.SpeachForm().Render(r.Context(), w); err != nil {
 		slog.Error("Failed to render new OSA form", "error", err.Error())
 	}
@@ -139,8 +159,20 @@ func Speach(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func convertSpeechpRequestToEmail(speech SpeachRequest) (string, error) {
+	var b strings.Builder
+	if err := email.SpeechEmailTmpl.Execute(&b, speech); err != nil {
+		return "", err
+	}
+	return b.String(), nil
+}
+
 func OsaPeopleNew(w http.ResponseWriter, r *http.Request) {
 	rsvp.PersonTile().Render(r.Context(), w)
+}
+
+func SpeechPeopleNew(w http.ResponseWriter, r *http.Request) {
+	rsvp.SpeachPersonTile().Render(r.Context(), w)
 }
 
 func HTMXEmpty(w http.ResponseWriter, r *http.Request) {

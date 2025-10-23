@@ -37,7 +37,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"home\" class=\"container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-1 gap-8 mb-4\"><div id=\"weddingday\" class=\" scroll-mt-24 md:scroll-mt-0 mb-4\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"home\" class=\"container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-1 gap-2 mb-4\"><div id=\"weddingday\" class=\" scroll-mt-24 md:scroll-mt-0 mb-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
