@@ -80,18 +80,22 @@ templ Header() {
 
 
     <!-- Title + Mobile Button Row -->
-    <div class="flex items-center justify-center relative">
-      <!-- Centered names -->
-      <h1 class="text-xl md:text-4xl font-serif tracking-wide text-gray-800">
-        Percy <span class="inline-block text-red-600">❤️</span> Michaela
-      </h1>
+<div class="grid items-center [grid-template-columns:1fr_auto_1fr] relative">
+  <!-- Centered names with heart perfectly in the middle -->
+  <h1 class="col-start-2 text-xl md:text-4xl font-serif tracking-wide text-gray-800">
+    <span class="grid items-center gap-2 [grid-template-columns:1fr_auto_1fr]">
+      <span class="justify-self-end">Percy</span>
+      <span class="inline-block text-red-600" aria-hidden="true">❤️</span>
+      <span class="justify-self-start">Michaela</span>
+    </span>
+  </h1>
 
-      <!-- Mobile menu button (floated right) -->
-      <button onclick="toggleMenu()" 
-              class="md:hidden text-gray-800 text-xl absolute right-0">
-        ☰
-      </button>
-    </div>
+  <!-- Mobile menu button aligned to the far right, doesn't affect centering -->
+  <button onclick="toggleMenu()"
+          class="md:hidden text-gray-800 text-xl justify-self-end">
+    ☰
+  </button>
+</div>
 
       <!-- Date Line with Fancy Borders -->
       <div class="flex items-center justify-center text-sm md:text-base text-gray-700 font-medium">
